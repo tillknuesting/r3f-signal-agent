@@ -18,12 +18,6 @@ source_groups:
     - hackernews-frontpage
     - hackernews-newest
   
-  cloud_native:
-    - devto-kubernetes
-  
-  ai_ml:
-    - devto-ai
-  
   code:
     - github-trending-go
     - github-trending-rust
@@ -31,3 +25,5 @@ source_groups:
 default_sources:
   - hackernews-frontpage
   - hackernews-newest
+  - github-trending-go
+  - github-trending-rust

@@ -1,0 +1,63 @@
+sources:
+  - id: "github-trending-go"
+    name: "GitHub Trending (Go)"
+    description: "Trending Go repositories on GitHub"
+    type: "chrome"
+    enabled: true
+    config:
+      url: "https://github.com/trending/go"
+      wait_selector: "article.Box-row"
+      container_selector: "article.Box-row"
+      title_selector: "h2 a"
+      link_selector: "h2 a"
+      description_selector: "p.col-9"
+    field_mapping:
+      title: "title"
+      url: "link"
+      summary: "description"
+    display:
+      icon: "📦"
+      color: "#24292E"
+      priority: 3
+
+  - id: "github-trending-rust"
+    name: "GitHub Trending (Rust)"
+    description: "Trending Rust repositories on GitHub"
+    type: "chrome"
+    enabled: true
+    config:
+      url: "https://github.com/trending/rust"
+      wait_selector: "article.Box-row"
+      container_selector: "article.Box-row"
+      title_selector: "h2 a"
+      link_selector: "h2 a"
+      description_selector: "p.col-9"
+    field_mapping:
+      title: "title"
+      url: "link"
+      summary: "description"
+    display:
+      icon: "🦀"
+      color: "#DEA584"
+      priority: 3
+
+  - id: "github-trending-ai"
+    name: "GitHub Trending (AI/ML)"
+    description: "Trending AI/ML repositories on GitHub"
+    type: "chrome"
+    enabled: false
+    config:
+      url: "https://github.com/trending/python?since=daily"
+      wait_selector: "article.Box-row"
+      container_selector: "article.Box-row"
+      title_selector: "h2 a"
+      link_selector: "h2 a"
+      description_selector: "p.col-9"
+    field_mapping:
+      title: "title"
+      url: "link"
+      summary: "description"
+    display:
+      icon: "🤖"
+      color: "#3572A5"
+      priority: 3
