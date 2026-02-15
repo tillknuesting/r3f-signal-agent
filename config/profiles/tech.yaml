@@ -1,0 +1,33 @@
+name: "tech"
+display_name: "Tech & Cloud Native"
+description: "Cloud native, Go, Rust, Kubernetes, AI/ML trends"
+
+prompts:
+  summarizer: |
+    Summarize the following tech news for a blog focused on cloud engineering,
+    Go, Rust, and AI. Keep it concise and highlight key technical insights:
+    {{content}}
+  
+  suggester: |
+    Based on these trending tech topics, suggest 3 blog post ideas that would
+    fit a blog about cloud engineering, Go, Rust, and AI. Topics:
+    {{topics}}
+
+source_groups:
+  core:
+    - hackernews-frontpage
+    - hackernews-newest
+  
+  cloud_native:
+    - devto-kubernetes
+  
+  ai_ml:
+    - devto-ai
+  
+  code:
+    - github-trending-go
+    - github-trending-rust
+
+default_sources:
+  - hackernews-frontpage
+  - hackernews-newest

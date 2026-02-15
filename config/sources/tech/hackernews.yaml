@@ -1,0 +1,58 @@
+sources:
+  - id: "hackernews-frontpage"
+    name: "Hacker News (Front Page)"
+    description: "Top trending stories on Hacker News"
+    type: "http"
+    enabled: true
+    config:
+      url: "https://hacker-news.firebaseio.com/v0/topstories.json"
+      item_url: "https://hacker-news.firebaseio.com/v0/item/{id}.json"
+      limit: 30
+    field_mapping:
+      id: "id"
+      title: "title"
+      url: "url"
+      score: "score"
+      author: "by"
+      comments: "descendants"
+      timestamp: "time"
+    transforms:
+      - type: "timestamp"
+        field: "timestamp"
+        format: "unix"
+      - type: "default"
+        field: "url"
+        value: "https://news.ycombinator.com/item?id={id}"
+    display:
+      icon: "🟠"
+      color: "#FF6600"
+      priority: 1
+
+  - id: "hackernews-newest"
+    name: "Hacker News (Newest)"
+    description: "Latest submissions on Hacker News"
+    type: "http"
+    enabled: true
+    config:
+      url: "https://hacker-news.firebaseio.com/v0/newstories.json"
+      item_url: "https://hacker-news.firebaseio.com/v0/item/{id}.json"
+      limit: 30
+    field_mapping:
+      id: "id"
+      title: "title"
+      url: "url"
+      score: "score"
+      author: "by"
+      comments: "descendants"
+      timestamp: "time"
+    transforms:
+      - type: "timestamp"
+        field: "timestamp"
+        format: "unix"
+      - type: "default"
+        field: "url"
+        value: "https://news.ycombinator.com/item?id={id}"
+    display:
+      icon: "🟠"
+      color: "#FF6600"
+      priority: 2

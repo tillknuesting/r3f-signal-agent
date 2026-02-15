@@ -1,0 +1,34 @@
+active_profile: "tech"
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  auth:
+    enabled: false
+
+scheduler:
+  enabled: true
+  interval: 24h
+  timezone: "Europe/London"
+
+chrome:
+  headless: true
+  timeout: 30s
+  block_resources:
+    - images
+    - fonts
+    - css
+
+llm:
+  provider: "zai"
+  model: "glm-5"
+  api_key: "${ZAI_API_KEY}"
+  base_url: "https://api.z.ai/v1"
+
+storage:
+  type: "markdown"
+  base_path: "./data/profiles"
+
+logging:
+  level: "info"
+  format: "json"
