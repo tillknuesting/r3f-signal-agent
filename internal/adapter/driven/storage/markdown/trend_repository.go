@@ -210,18 +210,39 @@ func (r *TrendRepository) loadFromFile(filename string) ([]*entity.Trend, error)
 		return nil, fmt.Errorf("no frontmatter found")
 	}
 
-	frontmatterEnd := strings.Index(content[3:], "---")
-	if frontmatterEnd == -1 {
+	secondFrontmatter := strings.Index(content[3:], "---")
+	if secondFrontmatter == -1 {
 		return nil, fmt.Errorf("no frontmatter end found")
 	}
 
-	jsonStart := frontmatterEnd + 6
-	if jsonStart >= len(content) {
+	afterFrontmatter := content[secondFrontmatter+6:]
+
+	codeBlockStart := strings.Index(afterFrontmatter, "```json")
+	if codeBlockStart == -1 {
+		codeBlockStart = strings.Index(afterFrontmatter, "```")
+	}
+
+	var jsonContent string
+	if codeBlockStart != -1 {
+		afterCodeBlock := afterFrontmatter[codeBlockStart+3:]
+		if strings.HasPrefix(strings.TrimSpace(afterCodeBlock), "json") {
+			afterCodeBlock = strings.TrimSpace(afterCodeBlock)[4:]
+		}
+		codeBlockEnd := strings.Index(afterCodeBlock, "```")
+		if codeBlockEnd == -1 {
+			return []*entity.Trend{}, nil
+		}
+		jsonContent = strings.TrimSpace(afterCodeBlock[:codeBlockEnd])
+	} else {
+		jsonContent = strings.TrimSpace(afterFrontmatter)
+	}
+
+	if jsonContent == "" {
 		return []*entity.Trend{}, nil
 	}
 
 	var trends []entity.TrendDTO
-	if err := json.Unmarshal([]byte(content[jsonStart:]), &trends); err != nil {
+	if err := json.Unmarshal([]byte(jsonContent), &trends); err != nil {
 		return nil, err
 	}
 
